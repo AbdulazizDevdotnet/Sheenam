@@ -10,6 +10,6 @@ namespace Sheenam.Api.Models.Foundations.Guests
         Male,
         Female,
         Other
-        
+
     }
 }

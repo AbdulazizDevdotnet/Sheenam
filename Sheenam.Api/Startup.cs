@@ -45,7 +45,7 @@ namespace Sheenam.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(operations => 
+                app.UseSwaggerUI(operations =>
                     operations.SwaggerEndpoint(
                         url: "/swagger/v1/swagger.json",
                         name: "Sheenam.Api v1"));
