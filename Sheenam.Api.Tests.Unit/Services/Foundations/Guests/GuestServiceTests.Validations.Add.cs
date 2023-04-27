@@ -3,9 +3,11 @@
 // Free To Use To Find Comfort and Peace
 //================================
 
+using Moq;
 using Sheenam.Api.Models.Foundations.Guests;
 using Sheenam.Api.Services.Foundations.Guests.Exceptions;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
 {
@@ -30,6 +32,16 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
             await Assert.ThrowsAsync<GuestValidationException>(() =>
                 addGuestTask.AsTask());
 
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(expectedGuestValidationException))),
+                    Times.Once);
+
+            this.storageBrokerMock.Verify(broker =>
+                broker.InsertGuestAsync(It.IsAny<Guest>()),
+                    Times.Never);
+
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.storageBrokerMock.VerifyNoOtherCalls();
         }
             
     }
