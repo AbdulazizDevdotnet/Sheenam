@@ -22,9 +22,11 @@ namespace Sheenam.Api.Services.Foundations.Guests
             }
             catch (NullGuestException nullGuestException)
             {
-                
-
                 throw CreateAndLogValidationException(nullGuestException);
+            }
+            catch (InvalidGuestException invalidGuestException)
+            {
+                throw CreateAndLogValidationException(invalidGuestException);
             }
         }
 
