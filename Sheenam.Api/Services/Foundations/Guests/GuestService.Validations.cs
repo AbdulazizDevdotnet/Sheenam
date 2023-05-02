@@ -64,11 +64,9 @@ namespace Sheenam.Api.Services.Foundations.Guests
                         key: parameter,
                         value: rule.Message);
                 }
-            
             }
 
             invalidGuestException.ThrowIfContainsErrors();
         }
-
     }
 }
