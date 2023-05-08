@@ -47,7 +47,7 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public async Task ShouldThrowValidationExceptionOnAddIfGuestIsInvalidAndLogItAsync  (
+        public async Task ShouldThrowValidationExceptionOnAddIfGuestIsInvalidAndLogItAsync(
             string invalidText)
         {
             // given
@@ -104,7 +104,7 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
 
             this.loggingBrokerMock.VerifyNoOtherCalls();
             this.storageBrokerMock.VerifyNoOtherCalls();
-                
+
         }
 
         [Fact]

@@ -21,7 +21,7 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
             Guest someGuest = CreateRandomGuest();
             SqlException sqlException = GetSqlError();
             var failedGuestStorageException = new FailedGuestStorageException(sqlException);
-            
+
             var expectedGuestDependencyException =
                 new GuestDependencyException(failedGuestStorageException);
 
@@ -40,7 +40,7 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
             this.storageBrokerMock.Verify(broker =>
                 broker.InsertGuestAsync(someGuest),
                     Times.Once);
-            
+
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogCritical(It.Is(SameExceptionAs(
                     expectedGuestDependencyException))),
@@ -59,7 +59,7 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
 
             var duplicateKeyException =
                 new DuplicateKeyException(someMessage);
-            
+
             var alreadyExictGuestException =
                 new AlreadyExictGuestException(duplicateKeyException);
 
