@@ -8,10 +8,10 @@ using Xeptions;
 
 namespace Sheenam.Api.Models.Foundations.Guests.Exceptions
 {
-    public class AlreadyExictGuestException:Xeption
+    public class AlreadyExictGuestException : Xeption
     {
         public AlreadyExictGuestException(Exception innerException)
-            :base(message: "Guest already exists",innerException)
-        {}
+            : base(message: "Guest already exists", innerException)
+        { }
     }
 }

@@ -37,14 +37,14 @@ namespace Sheenam.Api.Services.Foundations.Guests
 
                 throw CreateAndLogCriticalDependencyException(failedGuestStorageException);
             }
-            catch(DuplicateKeyException duplicateKeyException)
+            catch (DuplicateKeyException duplicateKeyException)
             {
                 var alreadyExictGuestException =
                     new AlreadyExictGuestException(duplicateKeyException);
 
                 throw CreateAndLogDependencyValidationException(alreadyExictGuestException);
             }
-            catch (Exception exception) 
+            catch (Exception exception)
             {
                 var failedGuestServiceException =
                     new FailedGuestServiceException(exception);
@@ -70,7 +70,7 @@ namespace Sheenam.Api.Services.Foundations.Guests
 
             this.loggingBroker.LogCritical(guestDependencyException);
 
-            return guestDependencyException;        
+            return guestDependencyException;
         }
 
         private GuestDependencyValidationException CreateAndLogDependencyValidationException(
@@ -79,7 +79,7 @@ namespace Sheenam.Api.Services.Foundations.Guests
             var guestDependencyValidationException =
                 new GuestDependencyValidationException(exception);
 
-            this.loggingBroker.LogError( guestDependencyValidationException);
+            this.loggingBroker.LogError(guestDependencyValidationException);
 
             return guestDependencyValidationException;
         }
