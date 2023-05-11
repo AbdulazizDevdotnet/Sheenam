@@ -18,7 +18,7 @@ namespace Sheenam.Api.Services.Foundations.HomeRequests
         public HomeRequestService(IStorageBroker storageBroker) =>
             this.storageBroker = storageBroker;
 
-        public ValueTask<HomeRequest> AddHomeRequestAsync(HomeRequest homeRequest) =>
-            throw new NotImplementedException();
+        public async ValueTask<HomeRequest> AddHomeRequestAsync(HomeRequest homeRequest) =>
+            await this.storageBroker.InsertHomeRequestAsync(homeRequest);
     }
 }
