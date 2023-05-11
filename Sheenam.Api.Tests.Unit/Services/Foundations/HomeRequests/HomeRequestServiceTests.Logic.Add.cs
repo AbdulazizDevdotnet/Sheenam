@@ -19,12 +19,12 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.HomeRequests
             //given
             HomeRequest randomHomeRequest = CreateRandomHomeRequest();
             HomeRequest inputHomeRequest = randomHomeRequest;
-            HomeRequest returningHomeRequest = inputHomeRequest;
-            HomeRequest expectedHomeRequest = returningHomeRequest.DeepClone();
+            HomeRequest storageHomeRequest = inputHomeRequest;
+            HomeRequest expectedHomeRequest = storageHomeRequest.DeepClone();
 
             this.storageBrokerMock.Setup(broker =>
                 broker.InsertHomeRequestAsync(inputHomeRequest))
-                    .ReturnsAsync(returningHomeRequest);
+                    .ReturnsAsync(storageHomeRequest);
 
             //when
             HomeRequest actualHomeRequest =
