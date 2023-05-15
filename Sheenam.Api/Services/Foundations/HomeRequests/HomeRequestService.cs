@@ -3,16 +3,14 @@
 // Free To Use To Find Comfort and Peace
 //================================
 
-using System;
 using System.Threading.Tasks;
 using Sheenam.Api.Brokers.Loggings;
 using Sheenam.Api.Brokers.Storages;
 using Sheenam.Api.Models.Foundations.HomeRequests;
-using Sheenam.Api.Models.Foundations.HomeRequests.Exceptions;
 
 namespace Sheenam.Api.Services.Foundations.HomeRequests
 {
-    public class HomeRequestService : IHomeRequestService
+    public partial class HomeRequestService : IHomeRequestService
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
@@ -25,27 +23,12 @@ namespace Sheenam.Api.Services.Foundations.HomeRequests
             this.loggingBroker = loggingBroker;
         }
 
-        public async ValueTask<HomeRequest> AddHomeRequestAsync(HomeRequest homeRequest)
+        public ValueTask<HomeRequest> AddHomeRequestAsync(HomeRequest homeRequest) =>
+        TryCatch(async () =>
         {
-            try
-            {
-                if(homeRequest is null)
-                {
-                    throw new NullHomeRequestException();
-                }
+            ValidateHomeRequestNotNull(homeRequest);
 
-
-                return await this.storageBroker.InsertHomeRequestAsync(homeRequest);
-            }
-            catch (NullHomeRequestException nullHomeRequestException)
-            {
-                var homeRequestValidationException =
-                    new HomeRequestValidationException(nullHomeRequestException);
-
-                this.loggingBroker.LogError(homeRequestValidationException);
-
-                throw homeRequestValidationException;   
-            }
-        }
+            return await this.storageBroker.InsertHomeRequestAsync(homeRequest);    
+        });
     }
 }
